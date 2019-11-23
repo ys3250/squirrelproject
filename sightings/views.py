@@ -15,4 +15,7 @@ def all_sightings(request):
     }
     return render(request, 'sightings/all.html', context)
 
+def sighting_details(request, sightings_id):
+    sightings = Squirrel.objects.get(id=sightings_id)
+    return HttpResponse(Squirrel.unique_squirrel_id)
 # Create your views here.
