@@ -10,6 +10,7 @@ class Squirrel(models.Model):
         max_length = 100,
         help_text = _('Unique Squirrel ID'),
         unique = True,
+        primary_key = True,
     )
 
     morning = 'AM'
