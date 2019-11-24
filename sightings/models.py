@@ -15,10 +15,10 @@ class Squirrel(models.Model):
     morning = 'AM'
     afternoon = 'PM'
 
-    shift_choices = [
+    shift_choices = (
         (morning, 'AM'),
         (afternoon, 'PM'),
-    ]
+    )
 
     shift = models.CharField(
         max_length = 2,
@@ -69,19 +69,19 @@ class Squirrel(models.Model):
         null = True,
     )
 
-    true = 'TRUE'
-    false = 'FALSE'
-    none = ''
-    True_False = [
-        (true, 'TRUE'),
-        (false, 'FALSE'),
-        (none, ''),
-    ]
+    t = 'true'
+    f = 'false'
+    n = ''
+    True_False = (
+        (t, 'true'),
+        (f, 'false'),
+        (n, ''),
+    )
 
     running = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -89,7 +89,7 @@ class Squirrel(models.Model):
     chasing = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -97,7 +97,7 @@ class Squirrel(models.Model):
     climbing = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -105,7 +105,7 @@ class Squirrel(models.Model):
     eating = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -113,7 +113,7 @@ class Squirrel(models.Model):
     foraging = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -127,7 +127,7 @@ class Squirrel(models.Model):
     kuks = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -135,7 +135,7 @@ class Squirrel(models.Model):
     quaas = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -143,7 +143,7 @@ class Squirrel(models.Model):
     moans = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -151,7 +151,7 @@ class Squirrel(models.Model):
     tail_flags = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -159,7 +159,7 @@ class Squirrel(models.Model):
     tail_twitches = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -167,7 +167,7 @@ class Squirrel(models.Model):
     approaches = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -175,7 +175,7 @@ class Squirrel(models.Model):
     indifferent = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
@@ -183,7 +183,7 @@ class Squirrel(models.Model):
     runs_from = models.CharField(
         max_length = 10,
         choices = True_False,
-        default = none,
+        default = n,
         help_text = _('TRUE/FALSE'),
         null = True,
     )
