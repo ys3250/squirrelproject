@@ -9,6 +9,7 @@ class Squirrel(models.Model):
     unique_squirrel_id = models.CharField(
         max_length = 100,
         help_text = _('Unique Squirrel ID'),
+        unique = True,
     )
 
     morning = 'AM'
@@ -23,41 +24,49 @@ class Squirrel(models.Model):
         max_length = 2,
         choices = shift_choices,
         default = morning,
-        help_text = _('AM/PM')
+        help_text = _('AM/PM'),
+        null = True,
     )
 
     date = models.DateTimeField(
         help_text = _('Date'),
+        null = True,
     )
 
     age = models.CharField(
         max_length = 10,
         help_text = _('Age'),
+        null = True,
     )
 
     latitude = models.FloatField(
         max_length = 20,
         help_text =_('Latitude'),
+        null = True,
     )
 
-    Longtitude = models.FloatField(
+    longitude = models.FloatField(
         max_length = 20,
         help_text =_('Longtitude'),
+        null = True,
     )
 
     primary_fur_color = models.CharField(
         max_length = 100,
         help_text = _('Primary Fur Color'),
+        null = True,
     )
 
     location = models.CharField(
         max_length = 100,
         help_text = _('Location'),
+        null = True,
     )
 
     specific_location = models.CharField(
         max_length = 100,
         help_text = _('Specific Location'),
+        null = True,
     )
 
     true = 'TRUE'
@@ -69,44 +78,50 @@ class Squirrel(models.Model):
         (none, ''),
     ]
 
-    Running = models.CharField(
+    running = models.CharField(
         max_length = 10,
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
-    Chasing = models.CharField(
+    chasing = models.CharField(
         max_length = 10,
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
-    Climbing = models.CharField(
+    climbing = models.CharField(
         max_length = 10,
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
-    Eating = models.CharField(
+    eating = models.CharField(
         max_length = 10,
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
-    Foraging = models.CharField(
+    foraging = models.CharField(
         max_length = 10,
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     other_activities = models.CharField(
         max_length = 100,
         help_text = _('Other Activities'),
+        null = True,
     )
 
     kuks = models.CharField(
@@ -114,6 +129,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     quaas = models.CharField(
@@ -121,6 +137,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     moans = models.CharField(
@@ -128,6 +145,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     tail_flags = models.CharField(
@@ -135,6 +153,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     tail_twitches = models.CharField(
@@ -142,6 +161,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     approaches = models.CharField(
@@ -149,6 +169,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     indifferent = models.CharField(
@@ -156,6 +177,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
     runs_from = models.CharField(
@@ -163,6 +185,7 @@ class Squirrel(models.Model):
         choices = True_False,
         default = none,
         help_text = _('TRUE/FALSE'),
+        null = True,
     )
 
 # Create your models here.
