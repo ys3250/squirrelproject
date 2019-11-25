@@ -17,9 +17,18 @@ def all_sightings(request):
     return render(request, 'sightings/all.html', context)
 
 def sighting_details(request, unique_squirrel_id):
-    # sightings = Squirrel.objects.get(pk = unique_squirrel_id)
-    squirrel = get_object_or_404(Squirrel, pk = unique_squirrel_id)
-    return render(request, 'sightings/detail.html', {'squirrel': squirrel})
+    sightings = get_object_or_404(Squirrel, pk = unique_squirrel_id)
+    form = AddForm(request.POST or None, instance=sightings)
+    if request.method == 'POST' :
+        if form.is_valid():
+            model_instance = form.save(commit=False)
+            model_instance.timestamp = timezone.now()
+            model_instance.save()
+            return HttpResponse('thanks')
+        else:
+            return HttpResponse('invalid input')
+    else:
+        return render(request, 'sightings/detail.html', {'form': form})
     # return HttpResponse(Squirrel.unique_squirrel_id)
 
 def add_sighting(request):
