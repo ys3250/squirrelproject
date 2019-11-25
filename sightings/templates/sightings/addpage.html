@@ -2,9 +2,13 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action = "/add/" method = "post">
+<form method = "post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+{% endfor %}
     <input type = "submit" value = "Submit">
 </form>
-

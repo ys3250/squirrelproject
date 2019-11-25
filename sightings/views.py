@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Squirrel
@@ -6,7 +6,7 @@ from django.http import Http404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from .forms import AddForm
+from sightings.forms import AddForm
 
 def all_sightings(request):
     response_text = 'Here are the sightings in our database!'
@@ -29,16 +29,16 @@ def add_sighting(request):
         form = AddForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
-
+            model_instance = form.save(commit=False)
+            model_instance.timestamp = timezone.now()
+            model_instance.save()
+            return HttpResponse('thanks')
+        else:
+            return HttpResponse('invalid input')
     # if a GET (or any other method) we'll create a blank form
     else:
         form = AddForm()
-
-    return render(request, 'sightings/addpage.html', {'form': form})
+        return render(request, 'sightings/addpage.html', {'form': form})
 
 # class DetailView(generic.DetailView):
 #     model = Squirrel
