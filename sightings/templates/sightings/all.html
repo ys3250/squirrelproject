@@ -1,6 +1,16 @@
 <h1> Sightings in Central Park</h1>
-<h3> <a href='/sightings/add'> Add Sighting </h3>
-<h3> <a href='/sightings/stats'> Go to Stats </h3>
+<h3> <a href='/sightings/add'> Add Sighting </a></h3>
+<h3> <a href='/sightings/stats'> Go to Stats </a></h3>
+
+<form action="{% url 'sightings:view_map' %}" method="post">
+{% csrf_token %}
+<input type="radio" name="view_option" id="1" value="view_100">
+<label for = "view_option"> View 100 </label><br>
+<input type="radio" name="view_option" id="2" value="view_all">
+<label for = "view_option"> View All </label><br>
+<input type="submit" value="Go to map">
+</form>
+
 <ul>
     {% for sighting in sightings %}
         <li>

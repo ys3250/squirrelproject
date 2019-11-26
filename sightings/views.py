@@ -13,8 +13,14 @@ import numpy as np
 
 def view_map(request):
     response_text = 'map'
-    coordinates = Squirrel.objects.all()
-    #data from squirrelmodel
+    if request.method == 'POST':
+        if request.POST['view_option'] == 'view_100':
+        # try:
+            coordinates = Squirrel.objects.all()[:100]
+            #data from squirrelmodel
+        else:
+        # except:
+            coordinates = Squirrel.objects.all()
     context = {
         'coordinates': coordinates,
     }
@@ -26,6 +32,7 @@ def all_sightings(request):
     context = {
         'sightings': sightings,
     }
+
     return render(request, 'sightings/all.html', context)
 
 def sighting_details(request, unique_squirrel_id):
@@ -87,8 +94,8 @@ def delete(request, unique_squirrel_id):
 
 
 def stats(request):
-    qs = Squirrel.objects.all() 
-    qs = Squirrel.objects.exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '').exclude(age__isnull = True).exclude(age = '?').exclude(age = '') 
+    qs = Squirrel.objects.all()
+    qs = Squirrel.objects.exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '').exclude(age__isnull = True).exclude(age = '?').exclude(age = '')
     df = read_frame(qs)
     # return HttpResponse(df.to_html())
 
