@@ -1,10 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from django_pandas.managers import DataFrameManager
 
 class Squirrel(models.Model):
 
     def __str__(self):
         return self.unique_squirrel_id
+
+    objects = DataFrameManager()
 
     unique_squirrel_id = models.CharField(
         max_length = 100,
@@ -188,5 +191,4 @@ class Squirrel(models.Model):
         help_text = _('TRUE/FALSE'),
         null = True,
     )
-
 # Create your models here.

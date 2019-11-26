@@ -16,5 +16,11 @@
 
 <form action="{% url 'sightings:delete' sightings.unique_squirrel_id %}" method="post">
 {% csrf_token %}
+<input type="radio" name="confirmation" id="1" value="yes">
+<label for = "confirmation"> Yes </label><br>
+<input type="radio" name="confirmation" id="2" value="no">
+<label for = "confirmation"> No </label><br>
 <input type="submit" value="Delete">
 </form>
+
+

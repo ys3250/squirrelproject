@@ -7,6 +7,9 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from sightings.forms import AddForm
+from django_pandas.io import read_frame
+import pandas as pd
+import numpy as np
 
 def view_map(request):
     response_text = 'map'
@@ -37,9 +40,9 @@ def sighting_details(request, unique_squirrel_id):
             model_instance = form.save(commit=False)
             model_instance.timestamp = timezone.now()
             model_instance.save()
-            return HttpResponse('thanks')
+            return HttpResponse('Thanks! We have updated it!')
         else:
-            return HttpResponse('invalid input')
+            return HttpResponse('Invalid Input (Wrong Data etc.)')
     else:
         return render(request, 'sightings/detail.html', context)
     # return HttpResponse(Squirrel.unique_squirrel_id)
@@ -67,10 +70,41 @@ def delete(request, unique_squirrel_id):
     sightings = Squirrel.objects.all()
     context = {
         'sightings': sightings,
-        'squirrel': squirrel.unique_squirrel_id
+        'squirrel': squirrel.unique_squirrel_id,
     }
-    squirrel.delete()
-    return render(request, 'sightings/delete.html', context)
+    try:
+        if request.method == 'POST':
+            if request.POST['confirmation'] == 'yes':
+                squirrel.delete()
+                return render(request, 'sightings/delete.html', context)
+            else:
+                return render(request, 'sightings/detail.html', {
+                    'squirrel': squirrel.unique_squirrel_id,
+                    'error_message': "Please confirm to delete",
+                })
+    except:
+        return HttpResponse("Please confirm to delete")
+
+
+def stats(request):
+    qs = Squirrel.objects.all() 
+    # df = read_frame(qs)
+    # return HttpResponse(df.to_html())
+
+
+    # df = qs.to_dataframe()
+    # template = 'sightings/stats.html'
+    # context = {
+    #     'sightings': qs,
+    # }
+
+
+    df = read_frame(qs)
+    rows = ['primary_fur_color']
+    # cols = ['row_col_c']
+
+    pt = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
+    return HttpResponse(pt.to_html())
 
 # class DetailView(generic.DetailView):
 #     model = Squirrel
