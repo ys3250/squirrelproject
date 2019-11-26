@@ -54,3 +54,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for path in options['path']:
             import_(path)
+#enable arguments

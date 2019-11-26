@@ -10,12 +10,14 @@ INTERPRETER = "/usr/bin/python"
 def export_(path):
     conn = sqlite3.connect('db.sqlite3')
     cur = conn.cursor()
+    #enable sql command
     columns = cur.execute("SELECT * FROM sightings_squirrel;").description
     column_name = []
     for things in columns:
         column_name.append(things[0])
-    # available_table=(mycur.fetchall())
+    #get the column name
     squirrel_data = cur.execute("SELECT * FROM sightings_squirrel;").fetchall()
+    #get the squirrel data
     data = [column_name]
     for thing in squirrel_data:
         data.append(list(thing))
@@ -30,3 +32,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for path in options['path']:
             export_(path)
+# enable arguments afterwards

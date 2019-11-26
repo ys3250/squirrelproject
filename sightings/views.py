@@ -8,6 +8,15 @@ from django.views import generic
 from django.utils import timezone
 from sightings.forms import AddForm
 
+def view_map(request):
+    response_text = 'map'
+    coordinates = Squirrel.objects.all()
+    #data from squirrelmodel
+    context = {
+        'coordinates': coordinates,
+    }
+    return render(request, 'sightings/map.html', context)
+
 def all_sightings(request):
     response_text = 'Here are the sightings in our database!'
     sightings = Squirrel.objects.all()
