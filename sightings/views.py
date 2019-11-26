@@ -88,7 +88,8 @@ def delete(request, unique_squirrel_id):
 
 def stats(request):
     qs = Squirrel.objects.all() 
-    # df = read_frame(qs)
+    qs = Squirrel.objects.exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '').exclude(age__isnull = True).exclude(age = '?').exclude(age = '') 
+    df = read_frame(qs)
     # return HttpResponse(df.to_html())
 
 
@@ -100,8 +101,8 @@ def stats(request):
 
 
     df = read_frame(qs)
-    rows = ['primary_fur_color']
-    # cols = ['row_col_c']
+    rows = ['primary_fur_color','age']#,'location']
+    #cols = ['shift','eating']
 
     pt = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
     return HttpResponse(pt.to_html())
