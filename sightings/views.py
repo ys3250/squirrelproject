@@ -21,6 +21,8 @@ def view_map(request):
         else:
         # except:
             coordinates = Squirrel.objects.all()
+    else:
+        coordinates = Squirrel.objects.all()
     context = {
         'coordinates': coordinates,
     }
