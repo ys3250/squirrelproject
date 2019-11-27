@@ -4,7 +4,7 @@ from sightings.models import Squirrel
 class AddForm(ModelForm):
     class Meta:
         model = Squirrel
-        fields = ['latitude', 'longitude', 'unique_squirrel_id',
+        fields = ['unique_squirrel_id', 'latitude', 'longitude', 
         'shift', 'date', 'age', 'primary_fur_color', 'location',
         'specific_location', 'running', 'chasing', 'climbing','eating',
         'foraging', 'other_activities', 'kuks', 'quaas','moans',
@@ -35,3 +35,6 @@ class AddForm(ModelForm):
         self.fields['approaches'].required = False
         self.fields['indifferent'].required = False
         self.fields['runs_from'].required = False
+        for field in self.fields:
+            help_text = self.fields[field].help_text
+            self.fields[field].help_text = None
