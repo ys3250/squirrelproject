@@ -82,16 +82,16 @@ def delete(request, unique_squirrel_id):
     try:
         if request.method == 'POST':
             if request.POST['confirmation'] == 'yes':
+                context['message'] = f'{unique_squirrel_id} is deleted'
                 squirrel.delete()
                 return render(request, 'sightings/delete.html', context)
             else:
                 return render(request, 'sightings/detail.html', {
                     'squirrel': squirrel.unique_squirrel_id,
-                    'error_message': "Please confirm to delete",
+                    'error_message': "Please confirm to delete!",
                 })
     except:
-        return HttpResponse("Please confirm to delete")
-
+        return HttpResponse("Please confirm to delete!!")
 
 def stats(request):
     qs = Squirrel.objects.all()
