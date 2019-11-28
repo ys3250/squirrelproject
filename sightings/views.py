@@ -13,6 +13,7 @@ import numpy as np
 
 def view_map(request):
     response_text = 'map'
+    length = len(Squirrel.objects.all())
     if request.method == 'POST':
         # if request.POST['view_option'] == 'view_100':
         # # try:
@@ -23,14 +24,13 @@ def view_map(request):
         #     coordinates = Squirrel.objects.all()
         try:
             n = int(request.POST['view_option'])
-            if n > len(Squirrel.objects.all()):
-                raise ValueError('Too Much')
             coordinates = Squirrel.objects.all()[:n]
         except:
-            return HttpResponse('Too many!')
+            return HttpResponse('error')
     else:
         coordinates = Squirrel.objects.all()
     context = {
+        'length': length,
         'coordinates': coordinates,
     }
     return render(request, 'sightings/map.html', context)
