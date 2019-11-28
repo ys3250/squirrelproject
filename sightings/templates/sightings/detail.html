@@ -14,7 +14,7 @@
     </div>
 {% endfor %}
 	<br>
-    <input type = "submit" value = "Update">
+    <button onclick="return confirm('Are you sure?');">Update</button>
 </form>
 <!-- <h5> Are you sure you want to delete? </h5> -->
 <form action="{% url 'sightings:delete' sightings.unique_squirrel_id %}" method="post">
