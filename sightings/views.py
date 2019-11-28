@@ -121,19 +121,23 @@ def stats(request):
     #     'sightings': qs,
     # }
 
+    df_pv = dict()
+    
+    df = read_frame(qs)
+    rows = ['primary_fur_color','age']#,'location']
+    #cols = ['shift','eating']
+    pt = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
+    
+    df_pv['1'] = pt.to_html()
 
     df = read_frame(qs)
     rows = ['primary_fur_color','age']#,'location']
     #cols = ['shift','eating']
+    pt2 = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
 
-    pt = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
-    return HttpResponse(pt.to_html())
+    df_pv['2'] = pt2.to_html()
 
-# class DetailView(generic.DetailView):
-#     model = Squirrel
-#     template_name = 'squirrel/detail.html'
+    context = {'df_pv': df_pv}
+    # return HttpResponse(pt.to_html())
+    return render(request, 'sightings/stats.html', context)
 
-# def detail(request, unique_squirrel_id):
-#     squirrel = get_object_or_404(Squirrel, pk = unique_squirrel_id)
-#     return render(request, 'squirrel/detail.html', {'squirrel': squirrel})
-# Create your views here.
