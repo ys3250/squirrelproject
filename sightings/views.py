@@ -14,13 +14,20 @@ import numpy as np
 def view_map(request):
     response_text = 'map'
     if request.method == 'POST':
-        if request.POST['view_option'] == 'view_100':
-        # try:
-            coordinates = Squirrel.objects.all()[:100]
-            #data from squirrelmodel
-        else:
-        # except:
-            coordinates = Squirrel.objects.all()
+        # if request.POST['view_option'] == 'view_100':
+        # # try:
+        #     coordinates = Squirrel.objects.all()[:100]
+        #     #data from squirrelmodel
+        # else:
+        # # except:
+        #     coordinates = Squirrel.objects.all()
+        try:
+            n = int(request.POST['view_option'])
+            if n > len(Squirrel.objects.all()):
+                raise ValueError('Too Much')
+            coordinates = Squirrel.objects.all()[:n]
+        except:
+            return HttpResponse('Invalid Input (not a number or too many)')
     else:
         coordinates = Squirrel.objects.all()
     context = {
@@ -31,8 +38,10 @@ def view_map(request):
 def all_sightings(request):
     response_text = 'Here are the sightings in our database!'
     sightings = Squirrel.objects.all()
+    length = len(sightings)
     context = {
         'sightings': sightings,
+        'length': length,
     }
 
     return render(request, 'sightings/all.html', context)
@@ -83,15 +92,19 @@ def delete(request, unique_squirrel_id):
     }
     try:
         if request.method == 'POST':
-            if request.POST['confirmation'] == 'yes':
-                context['message'] = f'{unique_squirrel_id} is deleted'
-                squirrel.delete()
-                return render(request, 'sightings/delete.html', context)
-            else:
-                return render(request, 'sightings/detail.html', {
-                    'squirrel': squirrel.unique_squirrel_id,
-                    'error_message': "Please confirm to delete!",
-                })
+            # if request.POST['confirmation'] == 'yes':
+            #     context['message'] = f'{unique_squirrel_id} is deleted'
+            #     squirrel.delete()
+            #     return render(request, 'sightings/delete.html', context)
+            # else:
+            #     return render(request, 'sightings/detail.html', {
+            #         'squirrel': squirrel.unique_squirrel_id,
+            #         'error_message': "Please confirm to delete!",
+            #     })
+            context['message'] = f'{unique_squirrel_id} is deleted'
+            squirrel.delete()
+            return render(request, 'sightings/delete.html', context)
+
     except:
         return HttpResponse("Please confirm to delete!!")
 
