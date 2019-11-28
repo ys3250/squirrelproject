@@ -27,7 +27,7 @@ def view_map(request):
                 raise ValueError('Too Much')
             coordinates = Squirrel.objects.all()[:n]
         except:
-            return HttpResponse('Invalid Input (not a number or too many)')
+            return HttpResponse('Too many!')
     else:
         coordinates = Squirrel.objects.all()
     context = {
