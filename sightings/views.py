@@ -46,7 +46,7 @@ def all_sightings(request):
 
     return render(request, 'sightings/all.html', context)
 
-def sighting_details(request, unique_squirrel_id):
+def sighting_details(request, unique_squirrel_id, error_message = None):
     sightings = get_object_or_404(Squirrel, pk = unique_squirrel_id)
     form = AddForm(request.POST or None, instance=sightings)
     context = {
@@ -60,6 +60,8 @@ def sighting_details(request, unique_squirrel_id):
             model_instance.save()
             return HttpResponse('Thanks! We have updated it!')
         else:
+            # error_message = 'Invalid Input (Wrong Data etc.)'
+            # return HttpResponseRedirect(reverse('sightings:sighting_details', kwargs={'unique_squirrel_id':sightings.unique_squirrel_id}))
             return HttpResponse('Invalid Input (Wrong Data etc.)')
     else:
         return render(request, 'sightings/detail.html', context)
