@@ -14,6 +14,11 @@ class Squirrel(models.Model):
         help_text = _('Unique Squirrel ID'),
         unique = True,
         primary_key = True,
+        # RegexValidator(
+        # regex='^(\d{1,2}[A-Z])-(PM|AM)-(\d{4})-(\d{2})',
+        # message='unique squirrel id must be in form',
+        # code='invalid_id'
+        # ),
     )
 
     morning = 'AM'
