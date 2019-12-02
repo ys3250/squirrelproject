@@ -1,6 +1,16 @@
-<h1> Stats </h1>
-{% autoescape off %}
-{% for k,v in df_pv.items %}
-	{{ v }} <br>
-{% endfor %}
-{% endautoescape %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<h1> Stats </h1>
+		<h3> Total : {{length}} </h3>
+	</head>	
+
+	<body>
+		{% autoescape off %}
+		{% for k,v in df_pv.items %}
+			{{ v }} <br>
+		{% endfor %}
+		{% endautoescape %}
+	</body>
+</html>

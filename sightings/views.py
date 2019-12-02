@@ -112,34 +112,26 @@ def delete(request, unique_squirrel_id):
 
 def stats(request):
     qs = Squirrel.objects.all()
-    qs = Squirrel.objects.exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '').exclude(age__isnull = True).exclude(age = '?').exclude(age = '')
-    df = read_frame(qs)
-    # return HttpResponse(df.to_html())
-
-
-    # df = qs.to_dataframe()
-    # template = 'sightings/stats.html'
-    # context = {
-    #     'sightings': qs,
-    # }
-
+    length = len(qs)
     df_pv = dict()
     
-    df = read_frame(qs)
-    rows = ['primary_fur_color','age']#,'location']
-    #cols = ['shift','eating']
+    qs = Squirrel.objects.exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '').exclude(age__isnull = True).exclude(age = '?').exclude(age = '')
+    rows = ['primary_fur_color','age']
     pt = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
-    
     df_pv['1'] = pt.to_html()
 
-    df = read_frame(qs)
-    rows = ['primary_fur_color','age']#,'location']
-    #cols = ['shift','eating']
-    pt2 = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
-
+    qs = Squirrel.objects.exclude(location__isnull = True).exclude(location = '').exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '')
+    rows = ['primary_fur_color']
+    cols = ['location']
+    pt2 = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, cols=cols, aggfunc = 'count')
     df_pv['2'] = pt2.to_html()
 
     context = {'df_pv': df_pv}
+
+    context = {
+        'df_pv': df_pv,
+        'length': length,
+    }
     # return HttpResponse(pt.to_html())
     return render(request, 'sightings/stats.html', context)
 
