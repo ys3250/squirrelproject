@@ -1,28 +1,32 @@
+<!doctype>
+<html>
 <h1> Hey yo! You are looking at {{ sightings.unique_squirrel_id }} </h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<body>
+  {% load crispy_forms_tags %}
 
-{% load crispy_forms_tags %}
-
-<form method = "post">
-{% csrf_token %}
-{% for field in form %}
-    <div class="fieldWrapper" >
-        {{ field.errors }}
-        <!-- {{ field.label_tag }}  -->
-        {{ field|as_crispy_field }}
-    </div>
-{% endfor %}
-	<br>
-    <button onclick="return confirm('Are you sure?');">Update</button>
-</form>
-<!-- <h5> Are you sure you want to delete? </h5> -->
-<form action="{% url 'sightings:delete' sightings.unique_squirrel_id %}" method="post">
-{% csrf_token %}
-<!-- <input type="radio" name="confirmation" id="1" value="yes">
-<label for = "confirmation"> Yes </label><br>
-<input type="radio" name="confirmation" id="2" value="no">
-<label for = "confirmation"> No </label><br>
-<input type="submit" value="Delete"> -->
-<button onclick="return confirm('Are you sure?');">Delete</button>
-</form>
+  <form method = "post">
+  {% csrf_token %}
+  {% for field in form %}
+      <div class="fieldWrapper" >
+          {{ field.errors }}
+          <!-- {{ field.label_tag }}  -->
+          {{ field|as_crispy_field }}
+      </div>
+  {% endfor %}
+  	<br>
+      <button onclick="return confirm('Are you sure?');">Update</button>
+  </form>
+  <!-- <h5> Are you sure you want to delete? </h5> -->
+  <form action="{% url 'sightings:delete' sightings.unique_squirrel_id %}" method="post">
+  {% csrf_token %}
+  <!-- <input type="radio" name="confirmation" id="1" value="yes">
+  <label for = "confirmation"> Yes </label><br>
+  <input type="radio" name="confirmation" id="2" value="no">
+  <label for = "confirmation"> No </label><br>
+  <input type="submit" value="Delete"> -->
+  <button onclick="return confirm('Are you sure?');">Delete</button>
+  </form>
+</body>
+</html>

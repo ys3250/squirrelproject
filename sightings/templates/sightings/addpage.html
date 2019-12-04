@@ -1,17 +1,21 @@
-<h1> Adding new sighting! </h1>
+<!doctype>
+<html>
+  <h1> Adding new sighting! </h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-{% load crispy_forms_tags %}
-
-<form method = "post">
-{% csrf_token %}
-{% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        <!-- {{ field.label_tag }}  -->
-        {{ field|as_crispy_field }}
-    </div>
-{% endfor %}
-    <input type = "submit" value = "Submit">
-</form>
+  {% load crispy_forms_tags %}
+  <body>
+    <form method = "post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            <!-- {{ field.label_tag }}  -->
+            {{ field|as_crispy_field }}
+        </div>
+    {% endfor %}
+        <input type = "submit" value = "Submit">
+    </form>
+  </body>
+</html>

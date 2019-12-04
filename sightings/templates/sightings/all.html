@@ -1,25 +1,29 @@
+<!doctype>
+<html>
 <h1> Sightings in Central Park</h1>
 <h3> Total : {{length}} <h3>
 <h3> <a href='/sightings/add'> Add Sighting </a></h3>
 <h3> <a href='/sightings/stats'> Go to Stats </a></h3>
+<body>
+  <form action="{% url 'sightings:view_map' %}" method="post">
+    {% csrf_token %}
+    <!-- <input type="radio" name="view_option" id="1" value="view_100">
+    <label for = "view_option"> View 100 </label><br>
+    <input type="radio" name="view_option" id="2" value="view_all">
+    <label for = "view_option"> View All </label><br> -->
+    <input name="view_option" type="number" min="0" step="1"  max={{length}} id="option" maxlength="150" required="required">
+    <label for = "view_option"> Enter the number of squirrels you want to see </label><br>
+    <input type="submit" value="Go to map">
+  </form>
 
-<form action="{% url 'sightings:view_map' %}" method="post">
-{% csrf_token %}
-<!-- <input type="radio" name="view_option" id="1" value="view_100">
-<label for = "view_option"> View 100 </label><br>
-<input type="radio" name="view_option" id="2" value="view_all">
-<label for = "view_option"> View All </label><br> -->
-<input name="view_option" type="number" min="0" step="1"  max={{length}} id="option" maxlength="150" required="required">
-<label for = "view_option"> Enter the number of squirrels you want to see </label><br>
-<input type="submit" value="Go to map">
-</form>
 
-
-<ul>
-    {% for sighting in sightings %}
-        <li>
-          <a href={{ sighting.unique_squirrel_id }}>
-          {{ sighting.unique_squirrel_id }}</a>
-        </li>
-    {% endfor %}
-</ul>
+  <ul>
+      {% for sighting in sightings %}
+          <li>
+            <a href={{ sighting.unique_squirrel_id }}>
+            {{ sighting.unique_squirrel_id }}</a>
+          </li>
+      {% endfor %}
+  </ul>
+</body>
+</html>

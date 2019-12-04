@@ -124,12 +124,12 @@ def stats(request):
     # }
 
     df_pv = dict()
-    
+
     df = read_frame(qs)
     rows = ['primary_fur_color','age']#,'location']
     #cols = ['shift','eating']
     pt = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')
-    
+
     df_pv['1'] = pt.to_html()
 
     df = read_frame(qs)
@@ -142,4 +142,3 @@ def stats(request):
     context = {'df_pv': df_pv}
     # return HttpResponse(pt.to_html())
     return render(request, 'sightings/stats.html', context)
-

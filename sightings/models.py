@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from django_pandas.managers import DataFrameManager
+# from django.core.validators import RegexValidator
 
 class Squirrel(models.Model):
 
@@ -14,11 +15,11 @@ class Squirrel(models.Model):
         help_text = _('Unique Squirrel ID'),
         unique = True,
         primary_key = True,
-        # RegexValidator(
-        # regex='^(\d{1,2}[A-Z])-(PM|AM)-(\d{4})-(\d{2})',
+        # validators = [RegexValidator(
+        # regex='^(\d{1,2}[A-Z])-(PM|AM)-(0[1-9]|1[0-2])([0-5][0-9])-(\d{2})',
         # message='unique squirrel id must be in form',
         # code='invalid_id'
-        # ),
+        # ),],
     )
 
     morning = 'AM'

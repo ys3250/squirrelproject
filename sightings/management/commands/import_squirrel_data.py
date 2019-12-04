@@ -4,7 +4,7 @@ import os
 import sys
 import csv
 import datetime
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand #neccessary
 from sightings.models import Squirrel
 
 INTERPRETER = "/usr/bin/python"
@@ -12,7 +12,6 @@ INTERPRETER = "/usr/bin/python"
 def import_(path):
     with open(path) as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
-        type(readCSV)
         data = []
         for row in readCSV:
             data.append(row)
