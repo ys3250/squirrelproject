@@ -114,7 +114,7 @@ def stats(request):
     qs = Squirrel.objects.all()
     length = len(qs)
     df_pv = dict()
-    
+
     qs = Squirrel.objects.exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '').exclude(age__isnull = True).exclude(age = '?').exclude(age = '')
     rows = ['primary_fur_color','age']
     pt = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, aggfunc = 'count')

@@ -4,13 +4,13 @@ from sightings.models import Squirrel
 class AddForm(ModelForm):
     class Meta:
         model = Squirrel
-        fields = ['unique_squirrel_id', 'latitude', 'longitude',
-        'shift', 'date', 'age', 'primary_fur_color', 'location',
-        'specific_location', 'running', 'chasing', 'climbing','eating',
-        'foraging', 'other_activities', 'kuks', 'quaas','moans',
-        'tail_flags', 'tail_twitches', 'approaches','indifferent',
-         'runs_from']
-         #fields = '__all__'
+        # fields = ['unique_squirrel_id', 'latitude', 'longitude',
+        # 'shift', 'date', 'age', 'primary_fur_color', 'location',
+        # 'specific_location', 'running', 'chasing', 'climbing','eating',
+        # 'foraging', 'other_activities', 'kuks', 'quaas','moans',
+        # 'tail_flags', 'tail_twitches', 'approaches','indifferent',
+        #  'runs_from']
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super(AddForm, self).__init__(*args, **kwargs)

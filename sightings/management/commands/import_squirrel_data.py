@@ -11,40 +11,34 @@ INTERPRETER = "/usr/bin/python"
 
 def import_(path):
     with open(path) as csvfile:
-        readCSV = csv.reader(csvfile, delimiter=',')
-        data = []
-        for row in readCSV:
-            data.append(row)
-    data = data[1:]
+        reader = csv.DictReader(csvfile)
+        data = list(reader)
     for things in data:
-        try:
-            squirrel = Squirrel()
-            squirrel.longitude = float(things[0])
-            squirrel.latitude = float(things[1])
-            squirrel.unique_squirrel_id = things[2]
-            squirrel.shift = things[4]
-            squirrel.date = datetime.datetime.strptime(things[5],'%m%d%Y')
-            squirrel.age = things[7]
-            squirrel.primary_fur_color = things[8]
-            squirrel.location = things[12]
-            squirrel.specific_location = things[14]
-            squirrel.running = things[15]
-            squirrel.chasing = things[16]
-            squirrel.climbing = things[17]
-            squirrel.eating = things[18]
-            squirrel.foraging = things[19]
-            squirrel.other_activities = things[20]
-            squirrel.kuks = things[21]
-            squirrel.quaas = things[22]
-            squirrel.moans = things[23]
-            squirrel.tail_flags = things[24]
-            squirrel.tail_twitches = things[25]
-            squirrel.approaches = things[26]
-            squirrel.indifferent = things[27]
-            squirrel.runs_from = things[28]
-            squirrel.save()
-        except:
-            pass
+        squirrel = Squirrel()
+        squirrel.unique_squirrel_id = things['Unique Squirrel ID']
+        squirrel.longitude = float(things['X'])
+        squirrel.latitude = float(things['Y'])
+        squirrel.shift = things['Shift']
+        squirrel.date = datetime.datetime.strptime(things['Date'],'%m%d%Y')
+        squirrel.age = things['Age']
+        squirrel.primary_fur_color = things['Primary Fur Color']
+        squirrel.location = things['Location']
+        squirrel.specific_location = things['Specific Location']
+        squirrel.running = things['Running']
+        squirrel.chasing = things['Chasing']
+        squirrel.climbing = things['Climbing']
+        squirrel.eating = things['Eating']
+        squirrel.foraging = things['Foraging']
+        squirrel.other_activities = things['Other Activities']
+        squirrel.kuks = things['Kuks']
+        squirrel.quaas = things['Quaas']
+        squirrel.moans = things['Moans']
+        squirrel.tail_flags = things['Tail flags']
+        squirrel.tail_twitches = things['Tail twitches']
+        squirrel.approaches = things['Approaches']
+        squirrel.indifferent = things['Indifferent']
+        squirrel.runs_from = things['Runs from']
+        squirrel.save()
 
 class Command(BaseCommand):
     help = 'import data from csv'

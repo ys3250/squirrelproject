@@ -8,8 +8,6 @@ class Squirrel(models.Model):
     def __str__(self):
         return self.unique_squirrel_id
 
-    objects = DataFrameManager()
-
     unique_squirrel_id = models.CharField(
         max_length = 100,
         help_text = _('Unique Squirrel ID'),
