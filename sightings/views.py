@@ -126,6 +126,12 @@ def stats(request):
     pt2 = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, cols=cols, aggfunc = 'count')
     df_pv['2'] = pt2.to_html()
 
+    qs = Squirrel.objects.exclude(location__isnull = True).exclude(location = '').exclude(shift__isnull = True).exclude(shift = '')
+    rows = ['location']
+    cols = ['shift']
+    pt3 = qs.to_pivot_table(values='unique_squirrel_id', rows=rows, cols=cols, aggfunc = 'count')
+    df_pv['3'] = pt3.to_html()
+
     context = {'df_pv': df_pv}
 
     context = {
