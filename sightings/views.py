@@ -8,6 +8,7 @@ from django.views import generic
 from django.utils import timezone
 from sightings.forms import AddForm
 from django_pandas.io import read_frame
+from django.db.models import Avg
 import pandas as pd
 import numpy as np
 
@@ -113,6 +114,10 @@ def delete(request, unique_squirrel_id):
 def stats(request):
     qs = Squirrel.objects.all()
     length = len(qs)
+    
+    latitude = list(qs.aggregate(Avg('latitude')).values())[0]
+    longitude = list(qs.aggregate(Avg('longitude')).values())[0]
+
     df_pv = dict()
 
     qs = Squirrel.objects.exclude(primary_fur_color__isnull = True).exclude(primary_fur_color = '').exclude(age__isnull = True).exclude(age = '?').exclude(age = '')
@@ -137,6 +142,8 @@ def stats(request):
     context = {
         'df_pv': df_pv,
         'length': length,
+        'latitude': latitude,
+        'longitude': longitude,
     }
     # return HttpResponse(pt.to_html())
     return render(request, 'sightings/stats.html', context)
