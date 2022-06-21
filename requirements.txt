@@ -2,5 +2,5 @@ Django==2.2.7
 django-crispy-forms==1.8.1
 django-pandas==0.6.1
 regex==2019.6.8
-numpy==1.17.0
+numpy==1.22.0
 pandas==0.25.1
