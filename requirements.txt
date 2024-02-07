@@ -1,4 +1,4 @@
-Django==2.2.7
+Django==3.2.24
 django-crispy-forms==1.8.1
 django-pandas==0.6.1
 regex==2019.6.8
